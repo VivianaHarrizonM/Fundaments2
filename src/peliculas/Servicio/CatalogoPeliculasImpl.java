@@ -1,7 +1,6 @@
 
 package peliculas.Servicio;
 
-import java.util.logging.*;
 import peliculas.catalogo.*;
 import peliculas.datos.*;
 import peliculas.dominio.Pelicula;
