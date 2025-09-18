@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejercicio de formulario - Servlets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container mt-5">
+          <div class="row">
+              <div class="col-md-6 offset-md-3">
+                  <div class="card">
+                      <div class="card-header text-center">
+                          <h3> Formulario Registro Datos </h3>
+                      </div>
+                      <div class="card-body">
+                          <form name="formulario1" action="/ManejoFormulariosHTML" method="POST">
+                              <!-- Elemento oculto -->
+                              <input type="hidden" name="oculto" value="nuevo valor oculto"/>
+                              
+                              <!-- Usuario -->
+                              <div class="mb-3">
+                                  <label for="usuario" class="form-label"> Usuario: (*) </label>
+                                  <input type="text" class="form-control" name="usuario" id="usuario" value="Escribir usuario" required/>   
+                              </div>
+                              
+                              <!-- Password -->
+                              <div class="mb-3">
+                                  <label for="password" class="form-label"> Password: (*) </label>
+                                  <input type="password" class="form-control" name="password" id="password" required/>   
+                              </div>
+                               <!-- tecnologias -->
+                              <div class="mb-3">
+                                  <label class="form-label" > Tecnologías de Internet: </label><br>
+                                  <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="checkbox" name="tecnologia" id="java" value="java"/>
+                                      <label class="form-check-label" for="java">Java</label>
+                                  </div> 
+                                  <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="checkbox" name="tecnologia" id="python" value="python"/>
+                                      <label class="form-check-label" for="python">Phyton</label>
+                                  </div> 
+                                  <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="checkbox" name="tecnologia" id="net" value="net"/>
+                                      <label class="form-check-label" for="net">.Net</label>
+                                  </div> 
+                                  
+                                  <!-- Género-->
+                                  <div class="mb-3">
+                                     <br> <label class="form-label" >Género:</label><br>
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="genero" id="masculino" value="masculino"/>
+                                          <label class="form-check-label" for="masculino">Masculino</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="genero" id="femenino" value="femenino"/>
+                                          <label class="form-check-label" for="femenino">Femenino</label>
+                                      </div>
+                                  </div>
+                                  
+                                  <!-- Ocupación-->
+                                  <div class="mb-3">
+                                      <label for="ocupacion" class="form-label">Ocupación</label>
+                                      <select name="ocupacion" id="ocupacion" class="form-select">
+                                          <option value="ingeniero">Ingeniero</option>
+                                          <option value="contador">Contador</option>
+                                          <option value="abogado">Abogado</option>
+                                          <option value="otro">Otro</option>
+                                      </select>
+                                  </div>
+                                  
+                                  <!-- comentarios -->
+                                  <div class="mb-3">
+                                      <label for="comentarios" class="form-label">Comentarios:</label>
+                                      <textarea class="form-control" name="comentarios" id="comentarios" rows="3">
+                                      </textarea>
+                                  </div>
+                                  
+                                  
+                                      
+                                  <!-- Botón de enviar -->
+                                  <div class="mb-3 text-center">
+                                      <button type="submit" class="btn btn-primary"> Enviar</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
