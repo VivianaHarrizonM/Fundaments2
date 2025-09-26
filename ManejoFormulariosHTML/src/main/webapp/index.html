@@ -15,7 +15,8 @@
                           <h3> Formulario Registro Datos </h3>
                       </div>
                       <div class="card-body">
-                          <form name="formulario1" action="/ManejoFormulariosHTML" method="POST">
+                          <form name="formulario1" action="/ManejoFormulariosHTML/Servlet" method="POST">
+                              
                               <!-- Elemento oculto -->
                               <input type="hidden" name="oculto" value="nuevo valor oculto"/>
                               
@@ -30,9 +31,11 @@
                                   <label for="password" class="form-label"> Password: (*) </label>
                                   <input type="password" class="form-control" name="password" id="password" required/>   
                               </div>
-                               <!-- tecnologias -->
+                              
+                              <!-- tecnologias -->
                               <div class="mb-3">
-                                  <label class="form-label" > Tecnologías de Internet: </label><br>
+                                  <label class="form-label" > Tecnologías: </label><br>
+                                  
                                   <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="checkbox" name="tecnologia" id="java" value="java"/>
                                       <label class="form-check-label" for="java">Java</label>
