@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+import java.util.*;
 
 /**
  *
  * @author Viviana
  */
-@WebServlet(name = "CookiesServlet", urlPatterns = {"/CookiesServlet"})
-public class CookiesServlet extends HttpServlet {
+@WebServlet(name = "CarritoServlet", urlPatterns = {"/CarritoServlet"})
+public class CarritoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,46 +26,44 @@ public class CookiesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //valor inicial
-        int contador = 0;
+        //recuperamos el objeto HttpSession
+        HttpSession sesion = request.getSession();
         
-       
-        //Obtenemos el arreglo de Cookies
-        Cookie[] cookies = request.getCookies();
+        //Recuperamos la lista de articulos de la sesion (si existe)
+        List<String> articulos = (List<String>)sesion.getAttribute("articulos");
         
-        //Buscamos si ya existe una cookie creada con anterioridad
-        //LLamada visitante Recurrente
-        if(cookies != null){
-            for(Cookie c : cookies){
-                if("visitas".equals(c.getName())){
-                    try{
-                        contador = Integer.parseInt(c.getValue());
-                    }catch(NumberFormatException e){
-                        contador = 0;
-                    }
-                }  
-            }
+        //Verificamso si la lista de articulos ya existe
+        if(articulos == null){
+            //Si no existe, creamos la lista
+            articulos = new ArrayList<>();
+            sesion.setAttribute("articulos", articulos);  
         }
         
-        //Incrementar y guardar de nuevo
-        contador++;
-        Cookie cookieVisitas = new Cookie("visitas", String.valueOf(contador));
+        //Procesamos el nuevo articulo ingresado
+        String articuloNuevo = request.getParameter("articulo");
         
-        //Vida util
-        cookieVisitas.setMaxAge(24 * 60 * 60);
-        response.addCookie(cookieVisitas);
+        //Verificamos y agregamos el artículo nuevo si es valido
+        if(articuloNuevo != null && !articuloNuevo.trim().equals("")){
+            articulos.add(articuloNuevo);
+        }
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             out.println("<!DOCTYPE html>");
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Contador de visitas</title>");
+            out.println("<title>Carrito Compras</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Manejo de Cookies</h1>");
-            out.println("<p>Has visitado esta página " + contador +"</p>");
+            out.println("<h1>Lista de articulos </h1>");
+            out.println("<br/><ul>");
+            //Iteramos sobre la lista de articulos
+            for(String articulo: articulos){
+                out.println("<li>" + articulo + "</li>");
+            }
+            out.println("</ul><br/>");
+            out.println("<a href='/CarritoCompras'>Regresar al Inicio </a>");
             out.println("</body>");
             out.println("</html>");
         }

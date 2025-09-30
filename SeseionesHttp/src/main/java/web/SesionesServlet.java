@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author Viviana
  */
-@WebServlet(name = "CookiesServlet", urlPatterns = {"/CookiesServlet"})
-public class CookiesServlet extends HttpServlet {
+@WebServlet(name = "SesionesServlet", urlPatterns = {"/SesionesServlet"})
+public class SesionesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,46 +28,39 @@ public class CookiesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //valor inicial
-        int contador = 0;
+        // Obtenemos el objeto Sesion
+        HttpSession sesion = request.getSession();
         
-       
-        //Obtenemos el arreglo de Cookies
-        Cookie[] cookies = request.getCookies();
+        //Atributos de la sesion
+        String titulo;
+        Integer contadorVisitas = (Integer) sesion.getAttribute("contadorVisitas");
         
-        //Buscamos si ya existe una cookie creada con anterioridad
-        //LLamada visitante Recurrente
-        if(cookies != null){
-            for(Cookie c : cookies){
-                if("visitas".equals(c.getName())){
-                    try{
-                        contador = Integer.parseInt(c.getValue());
-                    }catch(NumberFormatException e){
-                        contador = 0;
-                    }
-                }  
-            }
+        // Validamos si es la primera vez que se accede a la sesion
+        if(contadorVisitas == null){
+            contadorVisitas = 1; //Primera vez
+            titulo = "Bienvenido por primera vez";
+        }else{
+            contadorVisitas++; //Incrementamos el contador en visitas posteriores
+            titulo = "Bienvenido nuevamente";
         }
         
-        //Incrementar y guardar de nuevo
-        contador++;
-        Cookie cookieVisitas = new Cookie("visitas", String.valueOf(contador));
+        //Guardamos el valor actualizado en la sesion
+        sesion.setAttribute("contadorVisitas", contadorVisitas);
         
-        //Vida util
-        cookieVisitas.setMaxAge(24 * 60 * 60);
-        response.addCookie(cookieVisitas);
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             out.println("<!DOCTYPE html>");
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Contador de visitas</title>");
+            out.println("<title>Sesiones Http</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Manejo de Cookies</h1>");
-            out.println("<p>Has visitado esta página " + contador +"</p>");
+            out.println("<h1>" + titulo + "</h1>");
+            out.println("<p>Número de accesos: "+ contadorVisitas+"</p>");
+            out.println("<p>Id de la sesion"+ sesion.getId()+"</p>");
+            out.println("<a href='/SeseionesHttp/index.html'>Volver al inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }
