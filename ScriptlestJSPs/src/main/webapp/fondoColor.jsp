@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
 
-    <style>
+    <!--style>
       body {
         background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -53,10 +53,10 @@
         margin-top: 20px;
         text-decoration: none;
       }
-    </style>
+    </style-->
   </head>
 
-  <body bgcolor="<%=fondo%>">
+  <body style="background-color:<%=fondo%>;">
     <main class="container py-5">
       <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
