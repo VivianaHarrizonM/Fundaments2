@@ -1,4 +1,4 @@
-package web.inclusiondinamica;
+package web.mavenproject1;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

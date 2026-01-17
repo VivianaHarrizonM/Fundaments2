@@ -1,4 +1,4 @@
-package web.inclusiondinamica.resources;
+package web.mavenproject1.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
